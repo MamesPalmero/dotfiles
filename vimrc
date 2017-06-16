@@ -41,6 +41,7 @@ set shell=/bin/zsh                " External commands shell
 set backupdir^=~/.vim/_backup//   " Backup files
 set directory^=~/.vim/_temp//     " Swap files
 set background=dark               " Default color maps for dark background
+set laststatus=2                  " Always display the status bar.
 
 " List chars
 set listchars=""                  " Reset the listchars
