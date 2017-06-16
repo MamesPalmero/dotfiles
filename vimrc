@@ -16,7 +16,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'othree/yajs.vim',                 { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'pangloss/vim-javascript',         { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx',                     { 'for': ['javascript.jsx'] }
 Plug 'slim-template/vim-slim',          { 'for': ['slim'] }
 Plug 'kchmck/vim-coffee-script',        { 'for': ['coffee'] }
