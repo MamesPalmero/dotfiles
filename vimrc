@@ -1,7 +1,3 @@
-" Pre-requisites
-" git vim-gnome exuberant-ctags silversearcher-ag
-
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree',             { 'on': 'NERDTreeToggle' }
@@ -27,12 +23,11 @@ call plug#end()
 
 " -----General settings-----
 
+syntax enable                     " Enable syntax highlighting
+set encoding=utf-8                " Use an encoding that supports unicode
 set number                        " Show line numbers
 set ruler                         " Show line and column number
 set nowrap                        " Don't wrap lines
-set tabstop=2                     " A tab is two spaces
-set shiftwidth=2                  " An autoindent (with <<) is two spaces
-set expandtab                     " Use spaces, not tabs
 set list                          " Show invisible characters
 set backspace=indent,eol,start    " Backspace through everything in insert mode
 set visualbell                    " Quitar beep de los cojones
@@ -41,7 +36,7 @@ set shell=/bin/zsh                " External commands shell
 set backupdir^=~/.vim/_backup//   " Backup files
 set directory^=~/.vim/_temp//     " Swap files
 set background=dark               " Default color maps for dark background
-set laststatus=2                  " Always display the status bar.
+set laststatus=2                  " Always display the status bar
 
 " List chars
 set listchars=""                  " Reset the listchars
@@ -60,7 +55,13 @@ set wildignore+=*/tmp/librarian/*,*/.vagrant/*,*/.kitchen/*,*/vendor/cookbooks/*
 set wildignore+=*/tmp/cache/assets/*/sprockets/*,*/tmp/cache/assets/*/sass/*      " Ignore rails temporary asset caches
 set wildignore+=*.swp,*~,._*                                                      " Disable temp and backup files
 
-" Searching
+" Indentation options
+set autoindent                    " New lines inherit the indentation of previous lines
+set tabstop=2                     " A tab is two spaces
+set shiftwidth=2                  " An autoindent (with <<) is two spaces
+set expandtab                     " Use spaces, not tabs
+
+" Search options
 set hlsearch                      " Highlight matches
 set incsearch                     " Incremental searching
 set ignorecase                    " Searches are case insensitive...
