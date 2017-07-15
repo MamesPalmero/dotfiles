@@ -54,6 +54,8 @@ set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*    
 set wildignore+=*/tmp/librarian/*,*/.vagrant/*,*/.kitchen/*,*/vendor/cookbooks/*  " Ignore librarian-chef, vagrant, test-kitchen and Berkshelf cache
 set wildignore+=*/tmp/cache/assets/*/sprockets/*,*/tmp/cache/assets/*/sass/*      " Ignore rails temporary asset caches
 set wildignore+=*.swp,*~,._*                                                      " Disable temp and backup files
+set wildignore+=*/node_modules/*                                                  " Ignore node modules
+
 
 " Indentation options
 set autoindent                    " New lines inherit the indentation of previous lines
