@@ -31,7 +31,6 @@ set nowrap                        " Don't wrap lines
 set list                          " Show invisible characters
 set backspace=indent,eol,start    " Backspace through everything in insert mode
 set visualbell                    " Quitar beep de los cojones
-set mouse=a                       " Enable mouse support
 set shell=/bin/zsh                " External commands shell
 set backupdir^=~/.vim/_backup//   " Backup files
 set directory^=~/.vim/_temp//     " Swap files
@@ -74,6 +73,10 @@ hi Visual ctermfg=255 ctermbg=25
 
 " Colors for searched word
 hi Search ctermfg=255 ctermbg=40
+
+" Mouse support
+set mouse=a                       " Enable the use of the mouse
+set ttymouse=xterm2               " Name of the terminal type for which mouse codes are to be recognized
 
 
 
