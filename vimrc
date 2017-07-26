@@ -55,7 +55,6 @@ set wildignore+=*/tmp/cache/assets/*/sprockets/*,*/tmp/cache/assets/*/sass/*    
 set wildignore+=*.swp,*~,._*                                                      " Disable temp and backup files
 set wildignore+=*/node_modules/*                                                  " Ignore node modules
 
-
 " Indentation options
 set autoindent                    " New lines inherit the indentation of previous lines
 set tabstop=2                     " A tab is two spaces
@@ -95,6 +94,9 @@ imap jk <Esc>
 " Use <Tab> as <Esc>
 vnoremap <Tab> <Esc>
 onoremap <Tab> <Esc>
+
+" Use <C-c> to copy in system's clipboard
+vnoremap <C-c> "+y
 
 
 
