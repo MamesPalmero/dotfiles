@@ -12,6 +12,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'pangloss/vim-javascript',         { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx',                     { 'for': ['javascript.jsx'] }
