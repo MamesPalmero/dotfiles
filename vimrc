@@ -6,7 +6,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'mileszs/ack.vim',                 { 'on': 'Ack' }
 Plug 'sjl/gundo.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-unimpaired'
@@ -129,9 +128,6 @@ vnoremap <C-c> "+y
 
   " https://github.com/terryma/vim-multiple-cursors#gmulti_cursor_insert_maps-default-
   let g:multi_cursor_insert_maps={'j':1}
-
-" Tagbar
-  nmap <F8> :TagbarToggle<CR>
 
 " Unimpaired
   " Bubble single lines
