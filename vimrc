@@ -13,10 +13,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'pangloss/vim-javascript',         { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'mxw/vim-jsx',                     { 'for': ['javascript.jsx'] }
-Plug 'slim-template/vim-slim',          { 'for': ['slim'] }
-Plug 'kchmck/vim-coffee-script',        { 'for': ['coffee'] }
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
