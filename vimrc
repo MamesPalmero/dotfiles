@@ -4,7 +4,7 @@ Plug 'scrooloose/nerdtree',             { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'kien/ctrlp.vim'
 Plug 'mileszs/ack.vim',                 { 'on': 'Ack' }
-Plug 'sjl/gundo.vim'
+Plug 'mbbill/undotree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rails'
@@ -115,9 +115,9 @@ vnoremap <C-c> "+y
   " To search word under cursor
   nmap <Leader>f :Ack <cword><CR>
 
-" Gundo.vim
-  nmap <F5> :GundoToggle<CR>
-  imap <F5> <ESC>:GundoToggle<CR>
+" Undotree
+  " Open undo tree
+  nnoremap <F5> :UndotreeToggle<CR>
 
 " Vim-multiple-cursors
   " Use <Tab> as <Esc>
