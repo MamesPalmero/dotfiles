@@ -113,7 +113,7 @@ vnoremap <C-c> "+y
   let g:ackprg = 'ag --vimgrep --smart-case'
 
   " To search word under cursor
-  nmap <Leader>f :Ack <cword><CR>
+  nmap <Leader>f :Ack <cword>
 
 " Undotree
   " Open undo tree
