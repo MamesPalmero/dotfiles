@@ -2,8 +2,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree',             { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'kien/ctrlp.vim'
-Plug 'mileszs/ack.vim',                 { 'on': 'Ack' }
+Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
@@ -108,12 +108,12 @@ vnoremap <C-c> "+y
   " Comment out the current line or text selected in visual mode with ñ
   map ñ :call NERDComment(0,"toggle") <CR>
 
-" Ack.vim
-  " Use Ag with ack.vim
-  let g:ackprg = 'ag --vimgrep --smart-case'
+" Fzf
+  " Open file finder
+  nmap <Leader>p :Files<CR>
 
-  " To search word under cursor
-  nmap <Leader>f :Ack <cword>
+  " Open file history
+  nmap <Leader>h :History<CR>
 
 " Undotree
   " Open undo tree
