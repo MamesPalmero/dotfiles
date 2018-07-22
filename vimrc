@@ -15,6 +15,7 @@ Plug 'tpope/vim-repeat'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-rooter'
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -139,6 +140,11 @@ vnoremap <C-c> "+y
   vmap <C-Down> ]egv
   vmap <C-k> [egv
   vmap <C-j> ]egv
+
+" Ale
+  " Linters enabled
+  let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop']}
+  let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop']}
 
 
 
