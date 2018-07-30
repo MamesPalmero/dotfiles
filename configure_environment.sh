@@ -2,7 +2,7 @@
 
 echo Installing pre-requisites
 sudo apt-get update
-sudo apt-get -y install git zsh tmux vim-gnome silversearcher-ag
+sudo apt-get -y install git zsh tmux vim-gnome silversearcher-ag xclip
 
 echo Installing tools to customize shell and editor
 curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
