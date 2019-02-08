@@ -1,3 +1,9 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree',             { 'on': 'NERDTreeToggle' }
@@ -149,7 +155,7 @@ vnoremap <C-c> "+y
 
 
 " -----References-----
-" https://junegunn.kr/2014/07/vim-plugins-and-startup-time/
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/
 " https://github.com/carlhuda/janus/blob/f285edf1533eaecf526dabe0962dcd5107319af7/janus/vim/core/before/plugin/
 " Script to print colors: https://askubuntu.com/questions/821157/print-a-256-color-test-pattern-in-the-terminal/821163#821163
