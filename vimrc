@@ -119,6 +119,8 @@ vnoremap <C-c> "+y
 " Fzf
   " Open file finder
   nmap <Leader>p :Files<CR>
+  " https://github.com/junegunn/fzf#respecting-gitignore
+  let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
   " Open file history
   nmap <Leader>h :History<CR>
