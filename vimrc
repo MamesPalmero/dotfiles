@@ -151,8 +151,9 @@ vnoremap <C-c> "+y
 
 " Ale
   " Linters enabled
-  let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop']}
-  let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop']}
+  let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'elixir': ['credo']}
+  let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'elixir': ['mix_format']}
+  let g:ale_fix_on_save = 1
 
 
 
