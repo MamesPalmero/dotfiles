@@ -104,6 +104,8 @@ onoremap <Tab> <Esc>
 " Use <C-c> to copy in system's clipboard
 vnoremap <C-c> "+y
 
+" Zoom window
+nmap <Leader>z :tabnew %<CR>
 
 
 " -----Custom settings for plugins-----
