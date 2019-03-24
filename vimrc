@@ -155,6 +155,10 @@ vnoremap <C-c> "+y
   let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'elixir': ['mix_format']}
   let g:ale_fix_on_save = 1
 
+" Polyglot
+  " Svelte files as html
+  autocmd BufNewFile,BufRead *.svelte set filetype=html
+
 
 
 " -----References-----
