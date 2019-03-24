@@ -28,7 +28,7 @@ install_tmux() {
 
 install_vim() {
   echo Installing vim...
-  sudo apt-get update && sudo apt-get -y install vim silversearcher-ag
+  sudo apt-get update && sudo apt-get -y install vim-gnome silversearcher-ag
   mkdir -p ~/.vim/_temp ~/.vim/_backup
   curl https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/vimrc -o ~/.vimrc
   vim +PlugInstall +qa
