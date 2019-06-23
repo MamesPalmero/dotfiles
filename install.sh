@@ -34,6 +34,15 @@ install_vim() {
   vim +PlugInstall +qa
 }
 
+install_nvim() {
+  echo Installing nvim...
+  sudo curl -L https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -o /usr/local/bin/nvim
+  sudo chmod +x /usr/local/bin/nvim
+  curl https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/init.vim --create-dirs -o ~/.config/nvim/init.vim
+  mkdir ~/.config/nvim/_temp ~/.config/nvim/_backup
+  nvim +PlugInstall +qa
+}
+
 install_asdf() {
   (which asdf > /dev/null) && return
 
@@ -61,10 +70,11 @@ check_dependencies
 
 tools=$(
 whiptail --title "My UNIX environment" --notags \
-  --checklist "Choose what you want to install" 20 78 4 \
+  --checklist "Choose what you want to install" 20 78 5 \
   "install_zsh" "zsh      -> Shell" ON \
   "install_tmux" "tmux     -> Terminal multiplexer" ON \
-  "install_vim" "vim      -> Text editor" ON \
+  "install_vim" "vim      -> Text editor" OFF \
+  "install_nvim" "nvim     -> Text editor" ON \
   "install_asdf" "asdf-vm  -> Extendable version manager" ON \
   3>&1 1>&2 2>&3
 )
