@@ -17,6 +17,8 @@ install_zsh() {
   curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
   sed -i "s/(git)/(git colored-man-pages zsh-autosuggestions)/" ~/.zshrc
+  echo '\n# Disable auto_cd to avoid collisions between executables and folders called same' >> ~/.zshrc
+  echo "unsetopt auto_cd" >> ~/.zshrc
   chsh -s /bin/zsh
 }
 
