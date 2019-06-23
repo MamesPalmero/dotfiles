@@ -153,13 +153,10 @@ nmap <Leader>z :tabnew %<CR>
 
 " Ale
   " Linters enabled
-  let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'elixir': ['credo']}
-  let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'elixir': ['mix_format']}
+  let g:ale_linter_aliases = {'svelte': ['javascript']}
+  let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'elixir': ['credo'], 'svelte': ['eslint']}
+  let g:ale_fixers = {'javascript': ['prettier-eslint'], 'ruby': ['rubocop'], 'elixir': ['mix_format'], 'svelte': ['prettier-eslint']}
   let g:ale_fix_on_save = 1
-
-" Polyglot
-  " Svelte files as html
-  autocmd BufNewFile,BufRead *.svelte set filetype=html
 
 
 
