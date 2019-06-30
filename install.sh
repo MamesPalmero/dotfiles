@@ -18,14 +18,14 @@ install_asdf() {
 
 check_and_install_requirements() {
   echo "Checking requirements..."
-  if which whiptail git curl asdf > /dev/null; then
+  if which whiptail git asdf > /dev/null; then
     echo "OK"
     return
   fi
 
-  echo "This script needs git, curl and asdf to work. So, these will be installed."
-  echo "Installing whiptail, git, curl and asdf..."
-  sudo apt-get update && sudo apt-get -y install whiptail git curl && install_asdf
+  echo "This script needs whiptail, git and asdf to work. So, these will be installed."
+  echo "Installing whiptail, git and asdf..."
+  sudo apt-get update && sudo apt-get -y install whiptail git && install_asdf
 }
 
 skip() {
