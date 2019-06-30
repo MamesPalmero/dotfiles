@@ -68,19 +68,24 @@ install_tmux() {
 }
 
 install_vim() {
-  echo Installing vim...
+  skip vim && return
+
+  rm -rf ~/.vim
   sudo apt-get update && sudo apt-get -y install vim-gnome silversearcher-ag
   mkdir -p ~/.vim/_temp ~/.vim/_backup
-  curl https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/vimrc -o ~/.vimrc
+  wget -O ~/.vimrc https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/vim/vimrc
   vim +PlugInstall +qa
 }
 
 install_nvim() {
-  echo Installing nvim...
-  sudo curl -L https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -o /usr/local/bin/nvim
+  skip nvim && return
+
+  rm -rf ~/.config/nvim
+  sudo apt-get update && sudo apt-get -y install silversearcher-ag xclip
+  sudo wget -O /usr/local/bin/nvim https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
   sudo chmod +x /usr/local/bin/nvim
-  curl https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/init.vim --create-dirs -o ~/.config/nvim/init.vim
-  mkdir ~/.config/nvim/_temp ~/.config/nvim/_backup
+  mkdir -p ~/.config/nvim/_temp ~/.config/nvim/_backup
+  wget -O ~/.config/nvim/init.vim https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/init.vim
   nvim +PlugInstall +qa
 }
 
