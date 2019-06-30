@@ -108,6 +108,14 @@ vnoremap <C-c> "+y
 nmap <Leader>z :tabnew %<CR>
 
 
+
+" -----Autocommands-----
+
+" Ensure that nopaste is always set
+au InsertLeave * set nopaste
+
+
+
 " -----Custom settings for plugins-----
 
 " Nerdtree
