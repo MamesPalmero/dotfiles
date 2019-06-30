@@ -1,10 +1,31 @@
-#!/bin/sh
+#!/bin/bash
 
-check_dependencies() {
-  if ! (which git curl > /dev/null); then
-    echo "This script needs git and curl to work. So, these will be installed."
-    sudo apt-get update && sudo apt-get -y install git curl
+install_asdf() {
+  rm -rf ~/.asdf
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.2
+
+  if ! grep -q "asdf-vm" ~/.bashrc; then
+    {
+      echo -e "\n# asdf-vm"
+      echo ". $HOME/.asdf/asdf.sh"
+      echo ". $HOME/.asdf/completions/asdf.bash"
+    } >> ~/.bashrc
   fi
+
+  source "$HOME/.asdf/asdf.sh"
+  source "$HOME/.asdf/completions/asdf.bash"
+}
+
+check_and_install_requirements() {
+  echo "Checking requirements..."
+  if which whiptail git curl asdf > /dev/null; then
+    echo "OK"
+    return
+  fi
+
+  echo "This script needs git, curl and asdf to work. So, these will be installed."
+  echo "Installing whiptail, git, curl and asdf..."
+  sudo apt-get update && sudo apt-get -y install whiptail git curl && install_asdf
 }
 
 install_zsh() {
@@ -45,30 +66,8 @@ install_nvim() {
   nvim +PlugInstall +qa
 }
 
-install_asdf() {
-  (which asdf > /dev/null) && return
 
-  echo Installing asdf...
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.6.3
-
-  if [ -f ~/.zshrc ]; then
-    echo '\n# asdf-vm' >> ~/.zshrc
-    echo '. $HOME/.asdf/asdf.sh' >> ~/.zshrc
-    echo '. $HOME/.asdf/completions/asdf.bash' >> ~/.zshrc
-  fi
-
-  if [ -f ~/.bashrc ]; then
-    echo '\n# asdf-vm' >> ~/.bashrc
-    echo '. $HOME/.asdf/asdf.sh' >> ~/.bashrc
-    echo '. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
-  fi
-
-  source "$HOME/.asdf/asdf.sh"
-  source "$HOME/.asdf/completions/asdf.bash"
-}
-
-
-check_dependencies
+check_and_install_requirements
 
 tools=$(
 whiptail --title "My UNIX environment" --notags \
@@ -77,8 +76,7 @@ whiptail --title "My UNIX environment" --notags \
   "install_tmux" "tmux     -> Terminal multiplexer" ON \
   "install_vim" "vim      -> Text editor" OFF \
   "install_nvim" "nvim     -> Text editor" ON \
-  "install_asdf" "asdf-vm  -> Extendable version manager" ON \
   3>&1 1>&2 2>&3
 )
 
-for tool in $tools; do eval $tool; done
+for tool in $tools; do eval "$tool"; done
