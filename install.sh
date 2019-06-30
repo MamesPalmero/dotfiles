@@ -58,9 +58,13 @@ install_zsh() {
 }
 
 install_tmux() {
-  echo Installing tmux...
-  sudo apt-get update && sudo apt-get -y install tmux xclip
-  curl https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/tmux.conf -o ~/.tmux.conf
+  skip tmux && return
+
+  sudo apt-get update && sudo apt-get -y install xclip
+  asdf plugin-add tmux
+  asdf install tmux 2.9a
+  asdf global tmux 2.9a
+  wget -O ~/.tmux.conf https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/tmux/tmux.conf
 }
 
 install_vim() {
