@@ -28,19 +28,33 @@ check_and_install_requirements() {
   sudo apt-get update && sudo apt-get -y install whiptail git curl && install_asdf
 }
 
-install_zsh() {
+skip() {
+  if ! which "$1" > /dev/null; then
+    echo "Installing $1..."
+    return 1
+  fi
 
-  echo Installing zsh...
+  if (whiptail --title "$1" --yesno "$1 is already installed. Do you want to reinstall it?" 8 78); then
+    echo "Installing $1..."
+    return 1
+  else
+    echo "Skipping $1..."
+    return 0
+  fi
+}
+
+install_zsh() {
+  skip zsh && return
+
   sudo apt-get update && sudo apt-get -y install zsh
 
-  [ -d ~/.oh-my-zsh ] && return
-
-  curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+  rm -rf ~/.oh-my-zsh ~/.zshrc ~/.fzf
+  git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-  sed -i "s/(git)/(git colored-man-pages zsh-autosuggestions)/" ~/.zshrc
-  echo '\n# Disable auto_cd to avoid collisions between executables and folders called same' >> ~/.zshrc
-  echo "unsetopt auto_cd" >> ~/.zshrc
-  chsh -s /bin/zsh
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
+  wget -O ~/.zshrc https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/zsh/zshrc
+
+  chsh -s "$(which zsh)"
 }
 
 install_tmux() {
