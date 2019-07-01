@@ -24,6 +24,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-rooter'
 Plug 'w0rp/ale'
 
+Plug 'Shougo/deoplete.nvim',            { 'do': ':UpdateRemotePlugins' }
+
 call plug#end()
 
 
@@ -165,6 +167,10 @@ au InsertLeave * set nopaste
   let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'elixir': ['credo'], 'svelte': ['eslint']}
   let g:ale_fixers = {'javascript': ['prettier-eslint'], 'ruby': ['rubocop'], 'elixir': ['mix_format'], 'svelte': ['prettier-eslint']}
   let g:ale_fix_on_save = 1
+
+" Deoplete
+  " Enable
+  let g:deoplete#enable_at_startup = 1
 
 
 

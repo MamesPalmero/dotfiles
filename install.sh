@@ -81,7 +81,22 @@ install_nvim() {
   skip nvim && return
 
   rm -rf ~/.config/nvim
-  sudo apt-get update && sudo apt-get -y install silversearcher-ag xclip
+
+  #Python support
+  sudo apt-get update
+  # https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+  sudo apt-get install --no-install-recommends \
+    make build-essential libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev \
+    wget curl llvm libncurses5-dev xz-utils tk-dev \
+    libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+  asdf plugin-add python
+  asdf install python 3.7.3
+  asdf global python 3.7.3
+  sudo apt-get install -y python3-pip
+  pip3 install --user neovim
+
+  sudo apt-get -y install silversearcher-ag xclip
   sudo wget -O /usr/local/bin/nvim https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
   sudo chmod +x /usr/local/bin/nvim
   mkdir -p ~/.config/nvim/_temp ~/.config/nvim/_backup
