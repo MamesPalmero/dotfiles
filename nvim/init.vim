@@ -99,16 +99,12 @@ vmap > >gv
 " Use jk as <Esc>
 imap jk <Esc>
 
-" Use <Tab> as <Esc>
-vnoremap <Tab> <Esc>
-onoremap <Tab> <Esc>
-
 " Use <C-c> to copy in system's clipboard
 vnoremap <C-c> "+y
 
-" Zoom window
-nmap <Leader>z :tabnew %<CR>
-
+" Use Tab to move in the completion popup menu
+imap <expr><Tab>  pumvisible() ? "\<C-n>" : "\<Tab>"
+imap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
 " -----Autocommands-----
@@ -142,9 +138,6 @@ au InsertLeave * set nopaste
   nnoremap <F5> :UndotreeToggle<CR>
 
 " Vim-multiple-cursors
-  " Use <Tab> as <Esc>
-  let g:multi_cursor_quit_key='<Tab>'
-
   " https://github.com/terryma/vim-multiple-cursors#gmulti_cursor_insert_maps-default-
   let g:multi_cursor_insert_maps={'j':1}
 
