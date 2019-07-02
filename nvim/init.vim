@@ -24,7 +24,12 @@ Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-rooter'
 Plug 'w0rp/ale'
 
+" ---Plugins to complete---
 Plug 'Shougo/deoplete.nvim',            { 'do': ':UpdateRemotePlugins' }
+" Elixir
+Plug 'slashmili/alchemist.vim'
+" Javascript - Need tern config
+Plug 'carlitux/deoplete-ternjs',        { 'do': 'npm install -g tern' }
 
 call plug#end()
 
@@ -162,9 +167,14 @@ au InsertLeave * set nopaste
   let g:ale_fix_on_save = 1
 
 " Deoplete
-  " Enable
+  " Enable Deoplete
   let g:deoplete#enable_at_startup = 1
 
+  " Jump to the definition while cursor is under the keyword in NORMAL mode
+  let g:alchemist_tag_map = 'gf'
+
+  " It includes additional information for the autocomplete if there is
+  let g:deoplete#sources#ternjs#types = 1
 
 
 " -----References-----
