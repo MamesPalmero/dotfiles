@@ -76,7 +76,7 @@ set wildignore+=*/tmp/cache/assets/*/sprockets/*,*/tmp/cache/assets/*/sass/*    
 set wildignore+=*.swp,*~,._*                                                      " Disable temp and backup files
 set wildignore+=*/node_modules/*                                                  " Ignore node modules
 
-" Colors viaul mode
+" Colors visual mode
 hi Visual ctermfg=255 ctermbg=25
 
 " Colors for searched word
