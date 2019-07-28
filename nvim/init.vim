@@ -22,15 +22,7 @@ Plug 'tpope/vim-repeat'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-rooter'
-Plug 'w0rp/ale'
-
-" ---Plugins to complete---
-Plug 'Shougo/deoplete.nvim',            { 'do': ':UpdateRemotePlugins' }
-" Elixir
-Plug 'slashmili/alchemist.vim'
-" Javascript - Need tern config
-Plug 'carlitux/deoplete-ternjs',        { 'do': 'npm install -g tern' }
-
+Plug 'neoclide/coc.nvim',               {'branch': 'release'}
 call plug#end()
 
 
@@ -107,9 +99,6 @@ imap jk <Esc>
 " Use <C-c> to copy in system's clipboard
 vnoremap <C-c> "+y
 
-" Use Tab to move in the completion popup menu
-imap <expr><Tab>  pumvisible() ? "\<C-n>" : "\<Tab>"
-imap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
 " -----Autocommands-----
@@ -159,22 +148,30 @@ au InsertLeave * set nopaste
   vmap <C-k> [egv
   vmap <C-j> ]egv
 
-" Ale
-  " Linters enabled
-  let g:ale_linter_aliases = {'svelte': ['javascript']}
-  let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'elixir': ['credo'], 'svelte': ['eslint']}
-  let g:ale_fixers = {'javascript': ['prettier-eslint'], 'ruby': ['rubocop'], 'elixir': ['mix_format'], 'svelte': ['prettier-eslint']}
-  let g:ale_fix_on_save = 1
+" Coc.nvim
+  " Map for document filetypes so the server could handle current document as another filetype
+  let g:coc_filetype_map = {
+        \ 'svelte': 'javascript',
+        \ }
 
-" Deoplete
-  " Enable Deoplete
-  let g:deoplete#enable_at_startup = 1
+  " Remap keys for gotos
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gr <Plug>(coc-references)
 
-  " Jump to the definition while cursor is under the keyword in NORMAL mode
-  let g:alchemist_tag_map = 'gf'
+  " Use K to show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-  " It includes additional information for the autocomplete if there is
-  let g:deoplete#sources#ternjs#types = 1
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  " Format on save
+  au BufWritePre * call CocAction('format')
+
 
 
 " -----References-----

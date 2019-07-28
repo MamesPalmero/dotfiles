@@ -1,0 +1,6 @@
+{
+  "suggest.noselect": false,
+
+  "javascript.validate.enable": false,
+  "prettier.eslintIntegration": true
+}

@@ -82,26 +82,23 @@ install_nvim() {
 
   rm -rf ~/.config/nvim
 
-  #Python support
+  #Nodejs support
   sudo apt-get update
-  # https://github.com/pyenv/pyenv/wiki#suggested-build-environment
-  sudo apt-get install --no-install-recommends \
-    make build-essential libssl-dev zlib1g-dev \
-    libbz2-dev libreadline-dev libsqlite3-dev \
-    wget curl llvm libncurses5-dev xz-utils tk-dev \
-    libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-  asdf plugin-add python
-  asdf install python 3.7.3
-  asdf global python 3.7.3
-  sudo apt-get install -y python3-pip
-  pip3 install --user neovim
+  # https://github.com/asdf-vm/asdf-nodejs#requirements
+  sudo apt-get -y install dirmngr gpg
+  asdf plugin-add nodejs
+  bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
+  asdf install nodejs 10.16.0
+  asdf global nodejs 10.16.0
 
   sudo apt-get -y install silversearcher-ag xclip
   sudo wget -O /usr/local/bin/nvim https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
   sudo chmod +x /usr/local/bin/nvim
   mkdir -p ~/.config/nvim/_temp ~/.config/nvim/_backup
   wget -O ~/.config/nvim/init.vim https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/init.vim
+  wget -O ~/.config/nvim/coc.settings.json https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/coc.settings.json
   nvim +PlugInstall +qa
+  nvim -c "CocInstall -sync coc-json coc-tsserver coc-prettier coc-eslint coc-css coc-elixir|q"
 }
 
 
