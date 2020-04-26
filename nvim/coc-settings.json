@@ -1,6 +1,9 @@
 {
-  "suggest.noselect": false,
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "svelte", "elixir"],
 
   "javascript.validate.enable": false,
-  "prettier.eslintIntegration": true
+  "prettier.eslintIntegration": true,
+  "svelte.plugin.typescript.diagnostics.enable": false,
+
+  "elixirLS.dialyzerEnabled": false
 }
