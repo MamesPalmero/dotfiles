@@ -7,13 +7,13 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'scrooloose/nerdtree',             { 'on': 'NERDTreeToggle' }
-Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
@@ -114,9 +114,11 @@ au InsertLeave * set nopaste
   " Open nerdtree with Ñ
   nmap Ñ :NERDTree <CR>
 
-" Nerdcommenter
-  " Comment out the current line or text selected in visual mode with ñ
-  map ñ :call NERDComment(0,"toggle") <CR>
+" Commentary
+  " Comment or uncomment [count] lines with ñ
+  nmap ñ gcc
+  " Comment or uncomment the highlighted lines with ñ
+  vmap ñ gc
 
 " Fzf
   " Open file finder
