@@ -96,7 +96,7 @@ install_nvim() {
   sudo chmod +x /usr/local/bin/nvim
   mkdir -p ~/.config/nvim/_temp ~/.config/nvim/_backup
   wget -O ~/.config/nvim/init.vim https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/init.vim
-  wget -O ~/.config/nvim/coc.settings.json https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/coc.settings.json
+  wget -O ~/.config/nvim/coc-settings.json https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/coc-settings.json
   nvim +PlugInstall +qa
   nvim -c "CocInstall -sync coc-json coc-tsserver coc-prettier coc-eslint coc-svelte coc-css coc-elixir|q"
 }
