@@ -88,8 +88,8 @@ install_nvim() {
   sudo apt-get -y install dirmngr gpg
   asdf plugin-add nodejs
   bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
-  asdf install nodejs 10.16.0
-  asdf global nodejs 10.16.0
+  asdf install nodejs 14.16.1
+  asdf global nodejs 14.16.1
 
   sudo apt-get -y install silversearcher-ag xclip
   sudo wget -O /usr/local/bin/nvim https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
