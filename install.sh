@@ -60,10 +60,7 @@ install_zsh() {
 install_tmux() {
   skip tmux && return
 
-  sudo apt-get update && sudo apt-get -y install xclip
-  asdf plugin-add tmux
-  asdf install tmux 2.9a
-  asdf global tmux 2.9a
+  sudo apt-get update && sudo apt-get -y install xclip tmux
   wget -O ~/.tmux.conf https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/tmux/tmux.conf
 }
 
@@ -84,15 +81,13 @@ install_nvim() {
 
   #Nodejs support
   sudo apt-get update
-  # https://github.com/asdf-vm/asdf-nodejs#requirements
-  sudo apt-get -y install dirmngr gpg
+  sudo apt-get -y install curl
   asdf plugin-add nodejs
-  bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
   asdf install nodejs 14.16.1
   asdf global nodejs 14.16.1
 
   sudo apt-get -y install silversearcher-ag xclip
-  sudo wget -O /usr/local/bin/nvim https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+  sudo wget -O /usr/local/bin/nvim https://github.com/neovim/neovim/releases/download/v0.4.4/nvim.appimage
   sudo chmod +x /usr/local/bin/nvim
   mkdir -p ~/.config/nvim/_temp ~/.config/nvim/_backup
   wget -O ~/.config/nvim/init.vim https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/init.vim
