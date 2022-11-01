@@ -78,22 +78,29 @@ install_nvim() {
   skip nvim && return
 
   rm -rf ~/.config/nvim
+  rm -rf ~/.local/share/nvim
 
   #Nodejs support
   sudo apt-get update
   sudo apt-get -y install curl
   asdf plugin-add nodejs
-  asdf install nodejs 14.16.1
-  asdf global nodejs 14.16.1
+  asdf install nodejs 18.12.0
+  asdf global nodejs 18.12.0
 
   sudo apt-get -y install silversearcher-ag xclip
-  sudo wget -O /usr/local/bin/nvim https://github.com/neovim/neovim/releases/download/v0.4.4/nvim.appimage
-  sudo chmod +x /usr/local/bin/nvim
+  asdf plugin add neovim
+  asdf install neovim 0.8.0
+  asdf global neovim 0.8.0
+  # sudo wget -O /tmp/nvim-linux64.deb https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb
+  # sudo apt install /tmp/nvim-linux64.deb
   mkdir -p ~/.config/nvim/_temp ~/.config/nvim/_backup
-  wget -O ~/.config/nvim/init.vim https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/init.vim
-  wget -O ~/.config/nvim/coc-settings.json https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/coc-settings.json
-  nvim +PlugInstall +qa
-  nvim -c "CocInstall -sync coc-json coc-tsserver coc-prettier coc-eslint coc-svelte coc-css coc-elixir|q"
+  wget -O ~/.config/nvim/init.vim \
+    https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/init.vim
+  wget -O ~/.config/nvim/coc-settings.json \
+    https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/coc-settings.json
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  nvim -i NONE -c "PlugInstall" -c "qa"
 }
 
 

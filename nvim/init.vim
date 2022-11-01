@@ -1,17 +1,12 @@
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'scrooloose/nerdtree',             { 'on': 'NERDTreeToggle' }
-Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'scrooloose/nerdtree',                           { 'on': 'NERDTreeToggle' }
+Plug 'junegunn/fzf',                                  { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-rails'
@@ -20,9 +15,10 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'sheerun/vim-polyglot'
-Plug 'airblade/vim-rooter'
-Plug 'neoclide/coc.nvim',               {'branch': 'release'}
+Plug 'nvim-treesitter/nvim-treesitter',               {'do': ':TSUpdate'}
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'Shatur/neovim-ayu'
+Plug 'neoclide/coc.nvim',                             {'branch': 'release'}
 call plug#end()
 
 
@@ -66,21 +62,6 @@ set listchars+=extends:>                   " The character to show in the last c
                                            " off and the line continues beyond the right of the screen
 set listchars+=precedes:<                  " The character to show in the last column when wrap is
                                            " off and the line continues beyond the left of the screen
-
-" Ignore files
-set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem               " Disable output and VCS files
-set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz                           " Disable archive files
-set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*      " Ignore bundler and sass cache
-set wildignore+=*/tmp/librarian/*,*/.vagrant/*,*/.kitchen/*,*/vendor/cookbooks/*  " Ignore librarian-chef, vagrant, test-kitchen and Berkshelf cache
-set wildignore+=*/tmp/cache/assets/*/sprockets/*,*/tmp/cache/assets/*/sass/*      " Ignore rails temporary asset caches
-set wildignore+=*.swp,*~,._*                                                      " Disable temp and backup files
-set wildignore+=*/node_modules/*                                                  " Ignore node modules
-
-" Colors visual mode
-hi Visual ctermfg=255 ctermbg=25
-
-" Colors for searched word
-hi Search ctermfg=255 ctermbg=40
 
 
 
@@ -137,6 +118,10 @@ au InsertLeave * set nopaste
   " https://github.com/terryma/vim-multiple-cursors#gmulti_cursor_insert_maps-default-
   let g:multi_cursor_insert_maps={'j':1}
 
+" Rooter
+  " The project root is identified by
+  let g:rooter_patterns = ['.git']
+
 " Unimpaired
   " Bubble single lines
   nmap <C-Up> [e
@@ -150,15 +135,42 @@ au InsertLeave * set nopaste
   vmap <C-k> [egv
   vmap <C-j> ]egv
 
+" Treesitter
+  " Enable treesitter
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"elixir", "heex", "javascript"},
+  sync_install = false,
+  auto_install = true,
+  highlight = { enable = true },
+  indent = {
+    enable = true,
+    disable = { "heex" },
+  },
+  context_commentstring = { enable = true },
+}
+EOF
+  " Treesitter based folding
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
+  set foldlevel=99
+  " Colorschema with treesitter support
+  colorscheme ayu
+
+
 " Coc.nvim
+  " Install elixirLS for coc-elixir manually from https://github.com/elixir-lsp/elixir-ls/releases/
+  " unzip elixir-ls-'version'.zip -d ~/.local/share/nvim/release/
+  let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-prettier', 'coc-eslint', 'coc-svelte', 'coc-css', 'coc-elixir']
+
   " Use tab for trigger completion with characters ahead and navigate.
   inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#pum#visible() ? coc#pum#next(1) :
+        \ CheckBackspace() ? "\<Tab>" :
         \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-  function! s:check_back_space() abort
+  function! CheckBackspace() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
   endfunction
@@ -169,19 +181,19 @@ au InsertLeave * set nopaste
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
 
-  " Highlight the symbol and its references when holding the cursor.
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " Use K to show documentation in preview window.
+  nnoremap <silent> K :call ShowDocumentation()<CR>
 
-  " Use K to show documentation in preview window
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-  function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
+  function! ShowDocumentation()
+    if CocAction('hasProvider', 'hover')
+      call CocActionAsync('doHover')
     else
-      call CocAction('doHover')
+      call feedkeys('K', 'in')
     endif
   endfunction
+
+  " Highlight the symbol and its references when holding the cursor.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
 
   " Call the 'format' action manually
   nmap <Leader>f :call CocAction('format')<CR>

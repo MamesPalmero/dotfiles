@@ -1,9 +1,9 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "svelte", "elixir"],
+  "coc.preferences.formatOnSave": true,
+  "[scss]": {
+    "coc.preferences.formatOnSave": false
+  },
 
-  "javascript.validate.enable": false,
-  "prettier.eslintIntegration": true,
-  "svelte.plugin.typescript.diagnostics.enable": false,
-
+  "elixir.pathToElixirLS": "~/.local/share/nvim/release/language_server.sh",
   "elixirLS.dialyzerEnabled": false
 }
