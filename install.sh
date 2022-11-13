@@ -98,6 +98,8 @@ install_nvim() {
     https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/init.vim
   wget -O ~/.config/nvim/coc-settings.json \
     https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/coc-settings.json
+  curl https://codeload.github.com/MamesPalmero/dotfiles/tar.gz/master \
+    tar -xz --directory ~/.config/nvim --strip=2 dotfiles-master/nvim/after
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   nvim -i NONE -c "PlugInstall" -c "qa"
