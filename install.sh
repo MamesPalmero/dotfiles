@@ -2,7 +2,7 @@
 
 install_asdf() {
   rm -rf ~/.asdf
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.2
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
 
   if ! grep -q "asdf-vm" ~/.bashrc; then
     {
