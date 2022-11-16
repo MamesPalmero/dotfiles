@@ -55,6 +55,7 @@ install_zsh() {
   wget -O ~/.zshrc https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/zsh/zshrc
 
   chsh -s "$(which zsh)"
+  zsh
 }
 
 install_tmux() {
