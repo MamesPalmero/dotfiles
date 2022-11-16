@@ -88,11 +88,8 @@ install_nvim() {
   asdf global nodejs 18.12.0
 
   sudo apt-get -y install silversearcher-ag xclip
-  asdf plugin add neovim
-  asdf install neovim 0.8.0
-  asdf global neovim 0.8.0
-  # sudo wget -O /tmp/nvim-linux64.deb https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb
-  # sudo apt install /tmp/nvim-linux64.deb
+  sudo wget -O /tmp/nvim-linux64.deb https://github.com/neovim/neovim/releases/download/v0.8.1/nvim-linux64.deb
+  sudo apt install /tmp/nvim-linux64.deb
   mkdir -p ~/.config/nvim/_temp ~/.config/nvim/_backup
   wget -O ~/.config/nvim/init.vim \
     https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/init.vim
