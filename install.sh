@@ -106,7 +106,7 @@ install_nvim() {
 check_and_install_requirements
 
 tools=$(
-whiptail --title "My UNIX environment" --notags \
+whiptail --title "My environment" --notags \
   --checklist "Choose what you want to install" 20 78 5 \
   "install_zsh" "zsh      -> Shell" ON \
   "install_tmux" "tmux     -> Terminal multiplexer" ON \
