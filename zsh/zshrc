@@ -45,3 +45,7 @@ source ~/.fzf.zsh
 # asdf-vm
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+
+
+# -----Other options-----
+export ERL_AFLAGS="-kernel shell_history enabled"

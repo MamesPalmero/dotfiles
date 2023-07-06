@@ -2,7 +2,7 @@
 
 install_asdf() {
   rm -rf ~/.asdf
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.12.0
 
   if ! grep -q "asdf-vm" ~/.bashrc; then
     {
@@ -80,23 +80,26 @@ install_nvim() {
 
   rm -rf ~/.config/nvim
   rm -rf ~/.local/share/nvim
+  sudo rm -rf /tmp/nvim
 
   #Nodejs support
   sudo apt-get update
   sudo apt-get -y install curl
   asdf plugin-add nodejs
-  asdf install nodejs 18.12.0
-  asdf global nodejs 18.12.0
+  asdf install nodejs 18.16.1
+  asdf global nodejs 18.16.1
 
   sudo apt-get -y install silversearcher-ag xclip
-  sudo wget -O /tmp/nvim-linux64.deb https://github.com/neovim/neovim/releases/download/v0.8.1/nvim-linux64.deb
-  sudo apt install /tmp/nvim-linux64.deb
+  sudo wget -O /tmp/nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/download/v0.9.1/nvim-linux64.tar.gz
+  sudo tar fxzv /tmp/nvim-linux64.tar.gz -C /opt
+  sudo mv /opt/nvim-linux64 /opt/nvim
+  sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
   mkdir -p ~/.config/nvim/_temp ~/.config/nvim/_backup
   wget -O ~/.config/nvim/init.vim \
     https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/init.vim
   wget -O ~/.config/nvim/coc-settings.json \
     https://raw.githubusercontent.com/MamesPalmero/dotfiles/master/nvim/coc-settings.json
-  curl https://codeload.github.com/MamesPalmero/dotfiles/tar.gz/master \
+  curl https://codeload.github.com/MamesPalmero/dotfiles/tar.gz/master | \
     tar -xz --directory ~/.config/nvim --strip=2 dotfiles-master/nvim/after
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

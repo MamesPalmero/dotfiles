@@ -1,1 +1,1 @@
-noremap <buffer> <Leader>d orequire IEx; IEx.pry<ESC>
+noremap <buffer> <Leader>d odbg()<ESC>

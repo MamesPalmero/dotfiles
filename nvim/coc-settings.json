@@ -6,5 +6,7 @@
   },
 
   "elixir.pathToElixirLS": "~/.local/share/nvim/release/language_server.sh",
-  "elixirLS.dialyzerEnabled": false
+  "elixirLS.dialyzerEnabled": false,
+
+  "svelte.enable-ts-plugin": true
 }
